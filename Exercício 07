@@ -1,0 +1,83 @@
+use exercicios;
+/*a)     Listar a descrição da marca e a descrição do modelo de todos
+ os veículos com data de fabricação acima da média de fabricação (ano) entre os veículos cadastrados;
+*/
+SELECT ds_marca, ds_modelo
+FROM marca, modelo, veiculo
+WHERE nr_ano_fab > ( SELECT avg(nr_ano_fab) from veiculo)
+		AND veiculo.cd_modelo = modelo.cd_modelo
+        AND modelo.cd_marca = marca.cd_marca;
+		
+/*b)     Listar a placa e a descrição do modelo do(s) veículo(s) mais novo(s) 
+cadastrado(s) - considerar o ano modelo;
+*/
+SELECT nr_placa, ds_modelo
+FROM veiculo, modelo
+WHERE nr_ano_mod = (SELECT max(nr_ano_mod) FROM veiculo)
+		AND veiculo.cd_modelo = modelo.cd_modelo;
+
+/*
+c)     Listar dados dos veículos: placa, descrição da marca, descrição 
+do modelo que são movidos por mais de um combustível;
+*/
+SELECT max(quantidade_combutivel), nr_placa, ds_marca, ds_modelo
+FROM(
+SELECT count(*) as quantidade_combutivel, veiculo.nr_placa, ds_marca, ds_modelo 
+	FROM veiculo, modelo, marca, combustivel, veiculo_combustivel
+		WHERE veiculo.cd_modelo = modelo.cd_modelo
+			AND modelo.cd_marca = marca.cd_marca
+				AND veiculo_combustivel.nr_placa = veiculo.nr_placa
+					AND veiculo_combustivel.cd_combustivel = combustivel.cd_combustivel
+						GROUP BY nr_placa, ds_marca, ds_modelo ) as tab;
+							
+
+
+/*
+d)     Listar a descrição da marca que possui o maior número de veículos cadastrado;
+*/
+
+SELECT max(num_veiculos_cadastrados), ds_marca 
+FROM (SELECT count(*) as num_veiculos_cadastrados, ds_marca
+FROM veiculo, marca, modelo
+WHERE veiculo.cd_modelo = modelo.cd_modelo
+	AND modelo.cd_marca = marca.cd_marca
+		GROUP BY ds_marca) as tabelaAux;
+
+
+/*
+e)     Listar a descrição do(s) modelo(s) que possui(em) o maior número de veículos cadastrado;
+*/
+SELECT max(num_veiculos_cadastrados), ds_modelo
+FROM(SELECT ds_modelo, count(*) num_veiculos_cadastrados
+	FROM veiculo, modelo
+	WHERE veiculo.cd_modelo = modelo.cd_modelo
+	GROUP BY ds_modelo) 
+    as tabelaAux;
+
+
+/*
+f)     Listar a descrição do acessório mais popular 
+(que mais é encontrado) entre os veículos cadastrados fabricados entre os anos de 2015 e 2018;
+*/
+SELECT max(quantidade_veiculos_entre_2015_e_2018) , ds_acessorio
+FROM ( SELECT ds_acessorio, count(*) quantidade_veiculos_entre_2015_e_2018
+		FROM veiculo, acessorio, veiculo_acessorio
+		WHERE veiculo_acessorio.nr_placa = veiculo.nr_placa
+			AND veiculo_acessorio.cd_acessorio = acessorio.cd_acessorio
+				GROUP BY ds_acessorio) as tabelaAux;
+
+/*
+g)      Listar qual(is) acessórios não estão associados 
+a veículos fabricados a partir do ano de 2010;*/
+SELECT ds_acessorio
+FROM (
+SELECT ds_acessorio
+	FROM veiculo, acessorio, veiculo_acessorio
+		WHERE veiculo_acessorio.nr_placa != veiculo.nr_placa
+			AND veiculo_acessorio.cd_acessorio != acessorio.cd_acessorio
+				AND veiculo.nr_ano_fab > 2010
+					GROUP BY ds_acessorio
+) as tabelaAux;
+
+	
+				

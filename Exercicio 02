@@ -1,0 +1,115 @@
+create database exercicios;
+use exercicios;
+CREATE TABLE marca (
+cd_marca INTEGER,
+ds_marca VARCHAR(30)	
+);
+
+CREATE TABLE combustivel (
+cd_combustivel INTEGER,
+ds_combustivel VARCHAR(30)
+);
+
+CREATE TABLE localidade(
+cd_localidade INTEGER,
+nm_localidade VARCHAR(50)
+);
+
+CREATE TABLE modelo(
+cd_modelo INTEGER,
+cd_marca INTEGER,
+ds_modelo VARCHAR(50)
+);
+
+CREATE TABLE proprietario (
+cd_proprietario INTEGER,
+cd_localidade INTEGER,
+nm_proprietario VARCHAR(50),
+ds_logradouro VARCHAR(50),
+ds_complemento VARCHAR(50),
+ds_bairo VARCHAR(50),
+nr_telefone VARCHAR(15),
+ds_email VARCHAR(50),
+sg_uf CHAR(2)
+);
+
+CREATE TABLE veiculo (
+nr_placa INTEGER,
+cd_proprietario INTEGER,
+cd_modelo INTEGER,
+nr_ano_fab INTEGER,
+nr_ano_mod INTEGER,
+qt_portas INTEGER,
+ds_observacao VARCHAR(100)
+);
+
+CREATE TABLE veiculo_combustivel (
+cd_veiculo INTEGER,
+ds_combustivel VARCHAR(30)
+);
+
+CREATE TABLE acessorio (
+	cd_acessorio INTEGER PRIMARY KEY NOT NULL,
+    ds_acessorio VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE cor (
+	cd_cor INTEGER PRIMARY KEY NOT NULL,
+    ds_cor VARCHAR(50) NOT NULL
+);
+
+ALTER TABLE veiculo 
+	ADD COLUMN cd_cor INTEGER REFERENCES cor(cd_cor);
+    
+CREATE TABLE veiculo_acessorio (
+	nr_placa INTEGER REFERENCES veiculo(nr_placa),
+    cd_acessorio INTEGER REFERENCES acessorio(cd_acessorio)
+);
+
+ALTER TABLE combustivel 
+	ADD CONSTRAINT cd_combustivel_pk
+		PRIMARY KEY (cd_combustivel);
+
+ALTER TABLE marca
+	ADD CONSTRAINT cd_marca_pk
+		PRIMARY KEY (cd_marca);
+
+ALTER TABLE localidade
+	ADD CONSTRAINT cd_localidade_pk
+		PRIMARY KEY (cd_localidade);
+        
+ALTER TABLE veiculo_combustivel
+	ADD CONSTRAINT cd_combustivel_fk
+		FOREIGN KEY (cd_combustivel) REFERENCES combustivel(cd_combustivel);
+
+ALTER TABLE veiculo_combustivel
+	ADD CONSTRAINT nr_placa_fk
+		FOREIGN KEY (nr_placa) REFERENCES veiculo(nr_placa);
+        
+ALTER TABLE modelo
+	ADD CONSTRAINT cd_modelo_pk
+		PRIMARY KEY (cd_modelo);
+
+ALTER TABLE modelo 
+	ADD CONSTRAINT cd_marca_fk
+		FOREIGN KEY (cd_marca) REFERENCES marca(cd_marca);
+
+ALTER TABLE proprietario	
+	ADD CONSTRAINT cd_proprietario_pk
+		PRIMARY KEY (cd_proprietario);
+
+ALTER TABLE proprietario
+	ADD CONSTRAINT cd_localidade_fk
+		FOREIGN KEY (cd_localidade) REFERENCES localidade(cd_localidade);
+
+ALTER TABLE veiculo
+	ADD CONSTRAINT nr_placa_pk
+		PRIMARY KEY (nr_placa);
+
+ALTER TABLE veiculo
+	ADD CONSTRAINT cd_proprietario_fk
+		FOREIGN KEY (cd_proprietario) REFERENCES proprietario(cd_proprietario);
+
+ALTER TABLE veiculo
+	ADD CONSTRAINT cd_modelo_fk
+		FOREIGN KEY (cd_modelo) REFERENCES modelo(cd_modelo);

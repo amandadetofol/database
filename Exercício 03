@@ -1,0 +1,230 @@
+/*Cor*/
+INSERT INTO cor VALUES(1, "Vermelho");
+INSERT INTO cor VALUES(2, "Amarelo");
+INSERT INTO cor VALUES(3, "Verde");
+INSERT INTO cor VALUES(4, "Azul");
+INSERT INTO cor VALUES(5, "Branco");
+INSERT INTO cor VALUES(6, "Cinza");
+INSERT INTO cor VALUES(7, "Prata");
+INSERT INTO cor VALUES(8, "Preto");
+INSERT INTO cor VALUES(9, "Bege");
+INSERT INTO cor VALUES(10, "Rosa");
+
+
+/*Acessorio*/
+INSERT INTO acessorio VALUES(1, "Sensor de estacionamento");
+INSERT INTO acessorio VALUES(2, "Mini Geladeira");
+INSERT INTO acessorio VALUES(3, "Central multimidia");
+INSERT INTO acessorio VALUES(4, "Som surround 7.1");
+INSERT INTO acessorio VALUES(5, "Piloto automático");
+INSERT INTO acessorio VALUES(6, "Protetor de cárter");
+INSERT INTO acessorio VALUES(7, "Chip de potência");
+INSERT INTO acessorio VALUES(8, "Ar condicionado");
+INSERT INTO acessorio VALUES(9, "Molas esportivas");
+INSERT INTO acessorio VALUES(10, "Acessórios de carro para pets");
+
+/*Combustivel*/
+INSERT INTO combustivel VALUES(0,"Gasolina comum");
+INSERT INTO combustivel VALUES(2,"Gasolina aditivada");
+INSERT INTO combustivel VALUES(3,"Gasolina premium");
+INSERT INTO combustivel VALUES(4,"Etanol");
+INSERT INTO combustivel VALUES(5,"Etanol aditivado");
+INSERT INTO combustivel VALUES(6,"Diesel comum");
+INSERT INTO combustivel VALUES(7,"Diesel S-10");
+INSERT INTO combustivel VALUES(8,"Diesel aditivado");
+INSERT INTO combustivel VALUES(9,"Diesel premium");
+INSERT INTO combustivel VALUES(10,"GNV");
+
+/*Localidade*/
+INSERT INTO localidade VALUES(1, "Blumenau");
+INSERT INTO localidade VALUES(2, "Pomerode");
+INSERT INTO localidade VALUES(3, "Indaial");
+INSERT INTO localidade VALUES(4, "Gaspar");
+INSERT INTO localidade VALUES(5, "Rodeio");
+INSERT INTO localidade VALUES(6, "Ascurra");
+INSERT INTO localidade VALUES(7, "Rio dos Cedros");
+INSERT INTO localidade VALUES(8, "Timbó");
+INSERT INTO localidade VALUES(9, "Taió");
+INSERT INTO localidade VALUES(10, "Rio Negrinho");
+
+
+/*Marca*/
+INSERT INTO marca VALUES (1,"");
+INSERT INTO marca VALUES (2,"Volkswagen");
+INSERT INTO marca VALUES (3,"Ford");
+INSERT INTO marca VALUES (4,"Honda");
+INSERT INTO marca VALUES (5,"Hyundai");
+INSERT INTO marca VALUES (6,"Nissan");
+INSERT INTO marca VALUES (7,"Chevrolet");
+INSERT INTO marca VALUES (8,"Kia");
+INSERT INTO marca VALUES (9,"Mercedes-Benz");
+INSERT INTO marca VALUES (10,"BMW");
+
+UPDATE marca
+set ds_marca = 'Toyota'
+where cd_marca=1;
+
+/*Modelo*/
+INSERT INTO modelo VALUES(1,7,"Onix");
+INSERT INTO modelo VALUES(2,5,"HB20");
+INSERT INTO modelo VALUES(3,5,"Onix Plus");
+INSERT INTO modelo VALUES(4,2,"Fox");
+INSERT INTO modelo VALUES(5,3,"KA");
+INSERT INTO modelo VALUES(6,4,"Civic");
+INSERT INTO modelo VALUES(7,6,"Versa");
+INSERT INTO modelo VALUES(8,7,"Cruze");
+INSERT INTO modelo VALUES(9,8,"Soul");
+INSERT INTO modelo VALUES(10,9,"Sprinter");
+INSERT INTO modelo VALUES(11,10,"Série 01");
+
+/*Veiculo*/
+INSERT INTO veiculo VALUES (1,1,1,2018,2018,4,"Observação",1); 
+INSERT INTO veiculo VALUES (2,2,3,2018,2018,4,"Observação",2); 
+INSERT INTO veiculo VALUES (3,3,4,2018,2018,4,"Observação",3); 
+INSERT INTO veiculo VALUES (4,4,2,2018,2018,4,"Observação",4);
+INSERT INTO veiculo VALUES (5,5,5,2018,2018,5,"Observação",5);
+INSERT INTO veiculo VALUES (6,6,6,2018,2018,4,"Observação",6);
+INSERT INTO veiculo VALUES (7,7,7,2018,2018,4,"Observação",7);
+INSERT INTO veiculo VALUES (8,8,8,2018,2018,4,"Observação",8);
+INSERT INTO veiculo VALUES (9,9,9,2018,2018,4,"Observação",9);
+INSERT INTO veiculo VALUES (10,10,10,2018,2018,4,"Observação",10);
+
+/*Proprietario*/
+INSERT INTO proprietario
+	VALUES (10, 10, "Rosa Elaine Mariane da Silva", "rosaelainemarianedasilva-88@delboux.com.br,55",
+			"Nenhum", "Jardim Cidade Universitária", "(83) 99467-0638",
+            "rosaelainemarianedasilva-88@delboux.com.br", "SC");
+
+INSERT INTO proprietario
+	VALUES (9, 9, "Bianca Alana Giovana Teixeira", "Rua Cidade de Serraria,55",
+			"Nenhum", "Tapanã (Icoaraci)", "(91) 99544-3099",
+            "bbiancaalanagiovanateixeira@europamotors.com.br", "SC");
+
+
+INSERT INTO proprietario
+	VALUES (8, 8, "Antonio Ricardo André Porto", "Rua Cidade de Serraria,55",
+			"Nenhum", "Indústrias", "(83) 98464-6423",
+            "antonioricardoandreporto@avantii.com.br", "SC");
+
+INSERT INTO proprietario
+	VALUES (7, 7, "Simone Milena Maya Pinto", "Rua O,125",
+			"Nenhum", "Parque Dois Irmãos", "(85) 99977-4681",
+            "simonsimonemilenamayapinto@capgemini.com", "SC");
+
+INSERT INTO proprietario
+	VALUES (6, 6, "Vinicius Benedito Moraes", "Rua Carmelo Púleo,125",
+			"Nenhum", "Ponta Porã", "(67) 98141-1913",
+            "viniciusbenedito.viniciusbeneditomoraes@mfb.com.br", "SC");
+
+INSERT INTO proprietario
+	VALUES (5, 5, "Isaac Anthony da Conceição", "Rua Flor da Laranjeira,125",
+			"Nenhum", "Tarumã", "(92) 98116-0596",
+            "isaacanthonydaconceicao_@vcp.com.br", "SC");
+
+INSERT INTO proprietario
+	VALUES (4, 4, "Eduardo Yuri Galvão", "Rua A 150",
+			"Nenhum", "Jardim Tancredo Neves", "(66) 99248-1873",
+            "jenniferjulianaluziagomes_@hushmail.com", "SC");
+
+INSERT INTO proprietario
+	VALUES (3, 3, "Jennifer Juliana Luzia Gomes", "Rua Professora Neuza Lula Rodrigues 150",
+			"Nenhum", "Jardim Santa Amália", "(65) 99905-1629",
+            "jenniferjulianaluziagomes_@hushmail.com", "SC");
+
+INSERT INTO proprietario
+	VALUES (2, 1, "Stella Eliane Dias", "Rua Comandante Almiro,123",
+			"Nenhum", "Centro", "(75) 99945-9617", "stellaelianedias_@bravura.com.br", "SC");
+
+INSERT INTO proprietario
+	VALUES (1, 1, "Yago Lucca da Luz", "Via de Acesso,123",
+			"Nenhum", "Bom Jardim", "(95) 98407-7899", "yyagoluccadaluz@br.flextronics.com", "SC");
+            
+
+/*Veiculo acessorio*/
+INSERT INTO veiculo_acessorio VALUES (10,1);
+INSERT INTO veiculo_acessorio VALUES (10,2);
+INSERT INTO veiculo_acessorio VALUES (10,8);
+INSERT INTO veiculo_acessorio VALUES (10,9);
+
+INSERT INTO veiculo_acessorio VALUES (9,1);
+INSERT INTO veiculo_acessorio VALUES (9,2);
+INSERT INTO veiculo_acessorio VALUES (9,8);
+INSERT INTO veiculo_acessorio VALUES (9,10);
+
+INSERT INTO veiculo_acessorio VALUES (8,1);
+INSERT INTO veiculo_acessorio VALUES (8,2);
+INSERT INTO veiculo_acessorio VALUES (8,3);
+INSERT INTO veiculo_acessorio VALUES (8,4);
+INSERT INTO veiculo_acessorio VALUES (8,5);
+INSERT INTO veiculo_acessorio VALUES (8,6);
+
+INSERT INTO veiculo_acessorio VALUES (7,1);
+INSERT INTO veiculo_acessorio VALUES (7,2);
+INSERT INTO veiculo_acessorio VALUES (7,8);
+INSERT INTO veiculo_acessorio VALUES (7,10);
+
+INSERT INTO veiculo_acessorio VALUES (6,1);
+INSERT INTO veiculo_acessorio VALUES (6,2);
+INSERT INTO veiculo_acessorio VALUES (6,8);
+INSERT INTO veiculo_acessorio VALUES (6,9);
+
+INSERT INTO veiculo_acessorio VALUES (5,1);
+INSERT INTO veiculo_acessorio VALUES (5,2);
+INSERT INTO veiculo_acessorio VALUES (5,3);
+INSERT INTO veiculo_acessorio VALUES (5,4);
+INSERT INTO veiculo_acessorio VALUES (5,5);
+INSERT INTO veiculo_acessorio VALUES (5,6);
+
+INSERT INTO veiculo_acessorio VALUES (4,1);
+INSERT INTO veiculo_acessorio VALUES (4,2);
+INSERT INTO veiculo_acessorio VALUES (4,8);
+
+INSERT INTO veiculo_acessorio VALUES (3,1);
+INSERT INTO veiculo_acessorio VALUES (3,2);
+INSERT INTO veiculo_acessorio VALUES (2,3);
+INSERT INTO veiculo_acessorio VALUES (2,7);
+INSERT INTO veiculo_acessorio VALUES (3,8);
+
+INSERT INTO veiculo_acessorio VALUES (2,1);
+INSERT INTO veiculo_acessorio VALUES (2,2);
+INSERT INTO veiculo_acessorio VALUES (2,3);
+INSERT INTO veiculo_acessorio VALUES (2,8);
+
+INSERT INTO veiculo_acessorio VALUES (1,1);
+INSERT INTO veiculo_acessorio VALUES (1,2);
+INSERT INTO veiculo_acessorio VALUES (1,8);
+
+/*Veciulo combustivel*/
+INSERT INTO veiculo_combustivel VALUES (6,10);
+INSERT INTO veiculo_combustivel VALUES (7,10);
+INSERT INTO veiculo_combustivel VALUES (8,10);
+INSERT INTO veiculo_combustivel VALUES (9,10);
+
+INSERT INTO veiculo_combustivel VALUES (10,9);
+INSERT INTO veiculo_combustivel VALUES (10,8);
+
+INSERT INTO veiculo_combustivel VALUES (6,7);
+INSERT INTO veiculo_combustivel VALUES (7,7);
+INSERT INTO veiculo_combustivel VALUES (8,7);
+INSERT INTO veiculo_combustivel VALUES (9,7);
+
+INSERT INTO veiculo_combustivel VALUES (3,5);
+INSERT INTO veiculo_combustivel VALUES (2,5);
+INSERT INTO veiculo_combustivel VALUES (0,5);
+
+INSERT INTO veiculo_combustivel VALUES (10,6);
+
+INSERT INTO veiculo_combustivel VALUES (6,4);
+INSERT INTO veiculo_combustivel VALUES (7,4);
+INSERT INTO veiculo_combustivel VALUES (8,4);
+INSERT INTO veiculo_combustivel VALUES (9,4);
+
+INSERT INTO veiculo_combustivel VALUES (5,3);
+INSERT INTO veiculo_combustivel VALUES (4,3);
+INSERT INTO veiculo_combustivel VALUES (0,3);
+
+INSERT INTO veiculo_combustivel VALUES (3,2);
+INSERT INTO veiculo_combustivel VALUES (2,2);
+INSERT INTO veiculo_combustivel VALUES (0,2);
+
+INSERT INTO veiculo_combustivel VALUES (10,1);

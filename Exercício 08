@@ -1,0 +1,78 @@
+/*a)Criação de uma view para listar os dados dos veículos como:
+ placa, descrição da marca, descrição do modelo, ano modelo, ano 
+ fabricação e quantidade de km rodado e quantidade de portas;*/
+ CREATE VIEW v_veiculo
+ AS SELECT  nr_placa, ds_marca, ds_modelo,nr_ano_mod, nr_ano_fab, qt_portas
+	FROM veiculo, modelo, marca
+    WHERE veiculo.cd_modelo=modelo.cd_modelo AND marca.cd_marca=modelo.cd_marca;
+
+SELECT * FROM v_veiculo;
+ 
+/*b)Criação de uma view para listar dados completos dos veículos:
+ placa, descrição da marca, descrição do modelo, descrição da cor, 
+ ano modelo, ano fabricação, quantidade de km rodado, quantidade de portas, 
+ descrição dos acessórios e descrição do combustível que o move;*/
+ CREATE VIEW v_veiculo_completo
+	AS
+		SELECT veiculo.nr_placa, ds_marca, ds_modelo, ds_cor, nr_ano_mod, nr_ano_fab, 
+				qt_portas, ds_acessorio, ds_combustivel
+                FROM veiculo, modelo, marca, combustivel, acessorio, veiculo_combustivel, veiculo_acessorio, cor
+					WHERE veiculo.cd_modelo=modelo.cd_modelo
+							AND modelo.cd_marca = marca.cd_marca
+								AND veiculo.nr_placa = veiculo_combustivel.nr_placa
+									AND combustivel.cd_combustivel=veiculo_combustivel.cd_combustivel
+										AND acessorio.cd_acessorio=veiculo_acessorio.cd_acessorio
+											AND veiculo.nr_placa=veiculo_acessorio.nr_placa
+												AND veiculo.cd_cor=cor.cd_cor;
+SELECT * FROM v_veiculo_completo;
+ 
+
+/*c)Criação de uma view para listar a descrição da marca e a descrição do modelo
+ com a respectiva quantidade de veículos cadastrados;*/
+ CREATE VIEW v_marca_modelo
+	AS
+		SELECT ds_modelo, ds_marca, count(*) 
+			FROM veiculo, marca, modelo
+				WHERE modelo.cd_modelo=veiculo.cd_modelo
+					AND marca.cd_marca=modelo.cd_marca;
+
+ SELECT ds_modelo, ds_marca, count(*) as quantidade
+	FROM v_marca_modelo
+		GROUP BY quantidade;
+	
+/*d)Criação de uma view para listar o nome da localidade com a respectiva quantidade 
+proprietários associada (que residem na respectiva localidade);*/
+CREATE VIEW v_proprietario_localidade
+	AS
+		SELECT nm_localidade, count(*) quantidade_proprietario
+			FROM veiculo, localidade, proprietario
+				WHERE veiculo.cd_proprietario = proprietario.cd_localidade
+					AND proprietario.cd_localidade = localidade.cd_localidade
+					  GROUP BY  nm_localidade;
+SELECT * FROM v_proprietario_localidade;
+
+/*e)Criação de uma view para listar a descrição da cor com a respectiva quantidade de
+ veículos associados a cada cor;*/
+ CREATE VIEW v_veiculo_cor1
+	AS 
+		SELECT count(*) as quantidade_veiculo, ds_cor
+			FROM veiculo, cor
+				WHERE veiculo.cd_cor=cor.cd_cor
+					GROUP BY ds_cor;
+                
+SELECT * FROM v_veiculo_cor1;
+ 
+
+/*f)Criação de uma view para listar quais veículos (número da placa, descrição da marca e modelo) 
+que são movidos por mais de um combustível */
+
+CREATE VIEW v_veiculo_combustivel
+	AS SELECT count(*) as quantidade_combutivel, veiculo.nr_placa, ds_marca, ds_modelo 
+	FROM veiculo, modelo, marca, combustivel, veiculo_combustivel
+		WHERE veiculo.cd_modelo = modelo.cd_modelo
+			AND modelo.cd_marca = marca.cd_marca
+				AND veiculo_combustivel.nr_placa = veiculo.nr_placa
+					AND veiculo_combustivel.cd_combustivel = combustivel.cd_combustivel
+						GROUP BY nr_placa, ds_marca, ds_modelo;
+SELECT * FROM v_veiculo_combustivel
+	WHERE quantidade_combutivel > 1;

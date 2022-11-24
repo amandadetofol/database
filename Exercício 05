@@ -1,0 +1,92 @@
+/*a)Listar os nomes dos proprietários com a respectiva localidade (nome) em que residem;*/
+SELECT proprietario.nm_proprietario, localidade.nm_localidade
+	FROM proprietario,localidade
+		WHERE proprietario.cd_localidade=localidade.cd_localidade;
+
+/*b)Listar todos os modelos da marca "FIAT" ordenados pelo descrição do modelo;*/
+SELECT ds_modelo
+	FROM modelo, marca
+		WHERE modelo.cd_marca=marca.cd_marca
+			AND marca.ds_marca="FIAT";
+
+/*c)Listar todas as marcas (descrição) disponíveis com o respetivo modelo 
+(descrição), ordenando em ordem crescente de marca, seguida de modelo;*/
+SELECT ds_marca, ds_modelo
+	FROM marca, modelo
+		WHERE modelo.cd_marca=marca.cd_marca
+			ORDER BY ds_marca,ds_modelo;
+
+/*d)Listar a placa, o ano modelo e a descrição da cor de todos os veículos cadastrados,
+ ordenando pelo ano modelo, seguido da descrição da cor;*/
+ SELECT veiculo.nr_placa, veiculo.nr_ano_mod, cor.ds_cor
+	FROM veiculo,cor
+		WHERE veiculo.cd_cor=cor.cd_cor;
+
+/*e)Listar os seguintes dados do veículo: placa, nome do proprietário e 
+nome da localidade que o mesmo reside, desde que sua UF seja "SC";*/
+SELECT veiculo.nr_placa, proprietario.nm_proprietario, localidade.nm_localidade
+	FROM veiculo, proprietario, localidade
+		WHERE veiculo.cd_proprietario = proprietario.cd_proprietario
+			AND proprietario.cd_localidade = localidade.cd_localidade
+				AND proprietario.sg_uf="SC";
+
+/*f)     Listar dados dos veículos: placa, descrição da marca, 
+descrição do modelo, ano modelo, ano fabricação, quantidade de km 
+rodado e quantidade de portas, ordenando pelo veículo mais novo;*/
+SELECT veiculo.nr_placa, marca.ds_marca, modelo.ds_modelo, veiculo.nr_ano_fab, veiculo.qt_portas
+	FROM veiculo, marca, modelo
+		WHERE veiculo.cd_modelo=modelo.cd_modelo
+			AND modelo.cd_marca=marca.cd_marca;
+
+/*g)      Listar os veículos com placa, descrição da marca, 
+descrição do modelo, ano do modelo e a(s) respectiva(s) 
+descrição(ões) do(s) combustível(is) que é movido;*/
+SELECT veiculo.nr_placa, marca.ds_marca, modelo.ds_modelo, veiculo.nr_ano_mod, combustivel.ds_combustivel
+	FROM veiculo, marca, modelo, combustivel, veiculo_combustivel
+		WHERE veiculo.nr_placa = veiculo_combustivel.nr_placa
+			AND combustivel.cd_combustivel = veiculo_combustivel.cd_combustivel
+				AND veiculo.cd_modelo = modelo.cd_modelo
+					AND modelo.cd_marca=marca.cd_marca;
+
+/*h)     Listar os veículos (com placa, descrição da marca, descrição do modelo) 
+que possuem como acessório "Direção hidráulica";*/
+SELECT veiculo.nr_placa, marca.ds_marca, modelo.ds_modelo
+	FROM veiculo, marca, modelo, acessorio, veiculo_acessorio
+		WHERE veiculo.nr_placa=veiculo_acessorio.nr_placa
+			AND acessorio.cd_acessorio=veiculo_acessorio.cd_acessorio
+				AND veiculo.cd_modelo=modelo.cd_modelo
+					AND modelo.cd_marca=marca.cd_marca
+						AND acessorio.ds_acessorio="Direção hidráulica";
+		
+
+/*i)     Listar dados completos dos veículos: placa, descrição da marca, 
+descrição do modelo, descrição da cor, ano modelo, 
+ano fabricação, quantidade de km rodado, quantidade de portas, 
+descrição dos acessórios e descrição do combustível que o move;*/
+SELECT veiculo.nr_placa, marca.ds_marca, modelo.ds_modelo, cor.ds_cor, veiculo.nr_ano_mod, veiculo.qt_portas, acessorio.ds_acessorio, combustivel.ds_combustivel
+	FROM veiculo, marca, modelo, cor, acessorio, veiculo_acessorio, combustivel, veiculo_combustivel
+		WHERE veiculo.nr_placa = veiculo_combustivel.nr_placa
+			AND combustivel.cd_combustivel=veiculo_combustivel.cd_combustivel
+				AND veiculo.nr_placa = veiculo_acessorio.nr_placa
+					AND acessorio.cd_acessorio = veiculo_acessorio.cd_acessorio
+						AND veiculo.cd_modelo = modelo.cd_modelo
+							AND modelo.cd_marca=marca.cd_marca
+								AND veiculo.cd_cor = cor.cd_cor;
+
+
+/*j)Listar os veículos (placa, descrição da marca, descrição do modelo) 
+cadastrados que apresentam cor "branco(a)", são movidos a diesel,
+ e apresentam ano modelo superior a 2010;*/
+ SELECT veiculo.nr_placa, marca.ds_marca, modelo.ds_modelo
+	FROM veiculo, cor, marca, modelo, combustivel, veiculo_combustivel
+		WHERE cor.ds_cor="Branco" 
+			AND veiculo.cd_cor=cor.cd_cor
+				AND combustivel.ds_combustivel = "Diesel"
+					AND veiculo.nr_placa = veiculo_combustivel.nr_placa
+						AND combustivel.cd_combustivel=veiculo_combustivel.cd_combustivel
+							AND veiculo.cd_modelo=modelo.cd_modelo
+								AND modelo.cd_marca=marca.cd_marca;
+		
+						
+						
+		

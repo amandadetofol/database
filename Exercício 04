@@ -1,0 +1,64 @@
+use exercicios;
+
+/*a)     Listar todos os modelos disponíveis;*/
+SELECT * from modelo;
+
+/*b)Listar todas as marcas disponíveis;*/
+SELECT * from marca;
+
+/*c)     Listar qual(is) proprietário(s) residem nos estados de "SC" ou "PR";*/
+SELECT nm_proprietario
+FROM proprietario
+WHERE sg_uf="SC" OR sg_uf="PR";
+
+/*d)     Listar qual(is) proprietário(s) não possuem e-mail, mas que possuem número de telefone cadastrado;*/
+SELECT nm_proprietario
+FROM proprietario
+WHERE ds_email=NULL AND nr_telefone!=NULL;
+
+/*e)     Listar qual(is) proprietário(s) apresentam "Silva" no nome;*/
+SELECT nm_proprietario
+FROM proprietario
+WHERE nm_proprietario LIKE "Silva";
+
+/*f)      Listar todos as colunas do(s) veículo(s) que apresenta(m) ano de fabricação diferente do ano modelo;*/
+SELECT * 
+FROM veiculo
+WHERE nr_ano_fab != nr_ano_mod;
+
+/*g)     Listar o número da placa, o ano do modelo, a quantidade de km rodados e
+ a quantidade de portas dos veículos fabricados após ano de 2000, inclusive ano 2000;*/
+
+ SELECT nr_placa,nr_ano_mod, qt_km_rodado, qt_portas
+ FROM veiculo
+ WHERE nr_ano_fab >= 2000;
+
+/*h)Listar o número da placa do(s) veículo(s) que não possui(em) uma informação adicional cadastrada (coluna observação);*/
+SELECT nr_placa 
+FROM veiculo
+WHERE ds_observacao=NULL;
+
+/* i)Listar os dados do(s) veículo(s) que apresenta(m) quatro portas ou mais, ordenados pelo ano do modelo descendente;*/
+SELECT *
+FROM veiculo
+WHERE qt_portas >=4
+ORDER BY nr_ano_mod DESC;
+
+/*j)Listar todos os acessórios ordenados pela descrição;*/
+SELECT * 
+FROM acessorio
+ORDER BY ds_acessorio;
+
+/*k)Listar o número da placa do veículo, ano de fabricação e modelo do(s) veículos 
+fabricados a partir de 2010, com km rodada menor de 10000, 
+com 4 portas ou mais e que não possui(am) observações;*/
+
+SELECT nr_placa, nr_ano_fab, nr_ano_modelo
+FROM veiculo
+WHERE nr_ano_fab > 2010 AND qt_km_rodado>10000 AND qt_portas >=4 AND ds_observacoes=NULL;
+
+/*l)      Listar o nome do(s) proprietário(s) que residem 
+em um bairro em que o nome tenha a palavra "Novo" ou "Nova" e que a UF seja de "SC";*/
+SELECT nm_proprietario
+FROM proprietario
+WHERE ds_bairo NOT LIKE "Novo"  OR ds_bairo NOT LIKE "Nova" AND sg_uf="SC";

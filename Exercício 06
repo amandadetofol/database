@@ -1,0 +1,70 @@
+#Listar a média de km rodados entre os veículos cadastrados;
+SELECT avg(km_rodado)
+FROM veiculo;
+
+#Listar o ano de fabricação do(s)  veículo(s) mais novo e ano de fabricação do(s) veículo(s) 
+#mais antigo cadastrado na base de dados;
+SELECT max(nr_ano_fab) , min(nr_ano_fab)
+FROM veiculo;
+
+#Listar o ano modelo do veículo com a respectiva quantidade de veículos correspondente ao respectivo ano;
+SELECT nr_ano_mod, count(*)
+FROM veiculo
+GROUP BY nr_ano_mod;
+
+#Listar a descrição do combustível com a respectiva quantidade de veículos que apresentam o combustível, 
+#ordenando pelo maior número de veículos descendente;
+SELECT ds_combustivel, count(*) as num_v
+FROM combustivel, veiculo_combustivel
+WHERE combustivel.cd_combustivel = veiculo_combustivel.cd_combustivel
+GROUP BY ds_combustivel
+ORDER BY num_v DESC;
+
+#Listar a descrição do modelo com a respectiva quantidade de veículo(s) correspondente ao modelo listado;
+SELECT ds_modelo, count(*)
+FROM modelo, veiculo
+WHERE modelo.cd_modelo=veiculo.cd_modelo
+GROUP BY ds_modelo;
+
+#Listar todas as marcas (descrição) disponíveis com o respetivo modelo (descrição), bem como a quantidade
+# de veículo associada a marca e modelo listado;
+SELECT ds_marca, ds_modelo, count(*) qt_veiculo
+FROM marca, modelo, veiculo
+WHERE veiculo.cd_modelo=modelo.cd_modelo AND marca.cd_marca=modelo.cd_marca
+GROUP BY ds_marca, ds_modelo;
+
+# Listar a descrição do acessório com a respectiva quantidade de veículo que possuem o referido
+#acessório listado.
+SELECT ds_acessorio, count(*) qt_veiculo_acessorio
+FROM veiculo, veiculo_acessorio, acessorio
+WHERE veiculo.nr_placa=veiculo_acessorio.nr_placa AND acessorio.cd_acessorio=veiculo_acessorio.cd_acessorio
+GROUP BY ds_acessorio;
+
+# Listar o nome da localidade com a respectiva quantidade de proprietários vinculado(s) a cada localidade, 
+# restringindo ao estado de "SC";
+SELECT nm_localidade, count(*) qt_proprietario_localidade
+FROM proprietario,localidade
+WHERE proprietario.cd_localidade=localidade.cd_localidade AND proprietario.sg_uf="SC"
+GROUP BY nm_localidade;
+
+#Listar dados dos veículos: placa, descrição da marca, descrição do modelo e quantidade de 
+#acessórios associado a cada veículo listado, sendo que os veículos devem apresentar dois ou mais acessórios.
+SELECT veiculo.nr_placa, ds_marca, ds_modelo, count(*) qt_acessorio_veiculo
+FROM veiculo, marca, modelo, veiculo_acessorio, acessorio
+WHERE veiculo.cd_modelo=modelo.cd_modelo
+	AND modelo.cd_marca=marca.cd_marca
+		AND veiculo.nr_placa=veiculo_acessorio.nr_placa
+			AND acessorio.cd_acessorio=veiculo_acessorio.cd_acessorio
+            GROUP BY nr_placa, ds_marca, ds_modelo
+            HAVING qt_acessorio_veiculo>2;
+            
+# Listar dados dos veículos: placa, descrição da marca, descrição do modelo e quantidade de 
+#combustíveis associados a cada veículo listado.
+SELECT veiculo.nr_placa, ds_marca, ds_modelo, count(*) qt_comb_veiculo
+FROM veiculo, marca, modelo, veiculo_combustivel, combustivel
+WHERE veiculo.cd_modelo=modelo.cd_modelo
+	AND modelo.cd_marca=marca.cd_marca
+		AND veiculo.nr_placa=veiculo_combustivel.nr_placa
+			AND combustivel.cd_combustivel=veiculo_combustivel.cd_combustivel
+            GROUP BY nr_placa, ds_marca, ds_modelo
+				ORDER BY qt_comb_veiculo;
